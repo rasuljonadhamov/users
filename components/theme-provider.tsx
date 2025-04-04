@@ -23,14 +23,16 @@ const ThemeProviderContext = createContext<ThemeProviderState | undefined>(undef
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  attribute = "data-theme",
+  attribute = "class", 
   enableSystem = true,
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme)
 
   useEffect(() => {
     const root = window.document.documentElement
+
     root.classList.remove("light", "dark")
+console.log(root, theme, enableSystem);
 
     if (theme === "system" && enableSystem) {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
